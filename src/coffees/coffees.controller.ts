@@ -17,7 +17,7 @@ export class CoffeesController {
         // return `This actions return all coffees. Limit: ${limit}, offset: ${offset}`;
     }
 
-    @Get(':id')
+    @Get('flavors/:id')
     findOne(@Param('id') id:string) {
         return this.coffeesService.findOne(id);
         // return `This actions return #${id} coffe`;
