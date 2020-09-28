@@ -14,6 +14,12 @@ export class CoffeeEntity {
     brand: string;
 
     @JoinTable()
-    @ManyToMany(type => FlavorEntity, (flavor)=> flavor.coffess)
-    flavors: string[];
+    @ManyToMany(
+        type => FlavorEntity,
+        (flavor) => flavor.coffess,
+        {
+            cascade: true,
+        }
+    )
+    flavors: FlavorEntity[];
 }
