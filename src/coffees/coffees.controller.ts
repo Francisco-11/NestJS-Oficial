@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 
 @Controller('coffees')
 export class CoffeesController {
@@ -10,10 +11,11 @@ export class CoffeesController {
         private readonly coffeesService: CoffeesService,
     ){}
 
-    @Get('flavors')
-    fiandAll(@Query() paginationQuery) {
-        const { limit, offset } = paginationQuery;
-        return this.coffeesService.fiandAll();
+    
+    @Get()
+    fiandAll(@Query() paginationQuery: PaginationQueryDto) {
+
+        return this.coffeesService.fiandAll(paginationQuery);
         // return `This actions return all coffees. Limit: ${limit}, offset: ${offset}`;
     }
 
@@ -34,7 +36,7 @@ export class CoffeesController {
 
     @Patch(':id')
     update(@Param('id') id: string, @Body() updateCoffeDto: UpdateCoffeeDto) {
-        return this.coffeesService.update(id,updateCoffeDto)
+        // return this.coffeesService.update(id,updateCoffeDto)
         // return `This action updates #${id} coffee`;
     }
 
