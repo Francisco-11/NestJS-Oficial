@@ -13,6 +13,9 @@ export class CoffeeEntity {
     @Column()
     brand: string;
 
+    @Column({ default: 0 })
+    recomendations: number;
+    
     @JoinTable()
     @ManyToMany(
         type => FlavorEntity,
