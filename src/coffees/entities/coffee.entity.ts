@@ -8,7 +8,10 @@ export class CoffeeEntity {
     id: number;
 
     @Column()
-    name: string;
+    title: string;
+
+    @Column({ nullable: true })
+    description: string;
 
     @Column()
     brand: string;
