@@ -6,6 +6,8 @@ import { CoffeeEntity } from './entities/coffee.entity';
 import { FlavorEntity } from './entities/flavor.entity';
 import { EventEntity } from '../events/entities/event.entity';
 import { COFFEE_BRANDS } from './coffees.constants';
+import { async } from 'rxjs';
+import { Connection } from 'typeorm';
 
 @Injectable()
 export class CoffeeBrandsFactory {
@@ -24,7 +26,11 @@ export class CoffeeBrandsFactory {
         CoffeeBrandsFactory,
         {
             provide: COFFEE_BRANDS,
-            useFactory: (brandsFactory: CoffeeBrandsFactory) => brandsFactory.create(),
+            useFactory: async (connection: Connection): Promise<string[]> => {
+                const coffeBrands = await Promise.resolve(['buddy brew', 'nescafe']);
+                console.log('[!] Async factory');
+                return coffeBrands;
+            },
             inject: [CoffeeBrandsFactory]
         },
     ],
