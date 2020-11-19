@@ -20,7 +20,8 @@ export class CoffeesController {
 
     @Public()
     @Get()
-    fiandAll(@Query() paginationQuery: PaginationQueryDto) {
+    async findAll(@Query() paginationQuery: PaginationQueryDto) {
+        await new Promise(resolve => setTimeout(resolve, 5000));
 
         return this.coffeesService.fiandAll(paginationQuery);
         // return `This actions return all coffees. Limit: ${limit}, offset: ${offset}`;
@@ -28,7 +29,7 @@ export class CoffeesController {
 
     @Get('flavors/:id')
     findOne(@Param('id') id:string) {
-        return this.coffeesService.findOne(id);
+        return this.coffeesService.findOne('' + id);
         // return `This actions return #${id} coffe`;
     }
     
